@@ -1,0 +1,29 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block content %}
+<section id="previous-orders" class="container my-5">
+    <h2 class="text-center mb-4">{{title}}</h2>
+    <div class="row">
+        <!-- Order 1 -->
+         {%for item in originals%}
+        <div class="col-md-4 mb-4">
+            <a href="{% url 'detail' item.original.id %}">
+            <div class="order-photo position-relative">
+                <img src="{{item.latest_image.image.url}}" alt="Order 1" class="img-fluid">
+                <div class="description position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center text-white">
+                    <p class="text-center">{{item.original.title}}</p>
+                </div>
+
+            </div>
+        </a>
+        </div>
+        {%endfor%}
+        <!-- Order 2 -->
+    </div>
+    
+
+    <div class="text-center mt-4">
+        <a href="{% url 'order'%}" class="btn btn-brown">Place Your Orders Here</a>
+    </div>
+</section>
+{% endblock %}

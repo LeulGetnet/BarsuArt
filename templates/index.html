@@ -1,0 +1,85 @@
+{% extends 'base.html'%}
+{% block content %}
+{% load static %}
+
+
+<!-- About Me Section (with Portrait) -->
+
+<section class="brand-section">
+  <div class="logo-container">
+    <img src="{% static 'img/brand.png' %}" alt="Brand Logo" class="brand-logo">
+  </div>
+</section>
+  
+
+  <!-- Video Background Section -->
+  <section class="video-background">
+    <video autoplay loop muted playsinline>
+      <source src="{{back_vid.video.url}}" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </section>
+
+
+  <!-- Recent Works Section -->
+  {% comment %} <section id="works" class="container py-5 text-center">
+    <h2 class='mb-4'>Recent Works</h2>
+    
+    <div class="works-container">
+      <!-- Example works with hover effects -->
+      {%for latest_work in latest_works %}  
+      <div class="work-item">
+        <img src="{{latest_work.latest_image.image.url}}" alt="Project 2" class="img-fluid work-image">
+        <a href="{% url 'detail' id=latest_work.original.id %}" class="work-item-link"><div class="work-description">{{latest_work.original.title}}</div></a>
+      </div>
+      {% endfor %}
+    </div>
+  </section> {% endcomment %}
+
+  <!-- Contact Me Section -->
+
+  <section id="about" class="container py-5">
+      <h2 class="text-center">{{aboutme.Title}}</h2>
+      <div class="about-content d-flex align-items-center">
+        <!-- Portrait Image -->
+        <img src="{{aboutme.Photo.url}}" alt="Your Portrait" class="portrait-img me-4">
+        <!-- Text Content -->
+        <div class="about-text">
+          <p>{{aboutme.ParagraphOne}}</p>
+              <p> {{ aboutme.ParagraphTwo }}</p>
+        </div>
+      </div>
+    </section> 
+
+    <section id="contact" class="custom-contact-section">
+      <div class="form-container">
+        <h2 class="custom-contact-title">C O N T A C T </h2>
+        <form method="post" enctype="multipart/form-data" class="custom-contact-form">
+          {% csrf_token %}
+          <div class="custom-contact-form-group">
+            <label for="custom-name" class="custom-contact-label">Name</label>
+            {{form.name}}
+          </div>
+    
+          <div class="custom-contact-form-group">
+            <label for="custom-email" class="custom-contact-label">Email</label>
+            {{form.email}}
+          </div>
+    
+          <div class="custom-contact-form-group">
+            <label for="custom-message" class="custom-contact-label">Message</label>
+            {{form.message}}
+          </div>
+    
+          <button type="submit" class="custom-contact-button">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </form>
+      </div>
+    </section>
+
+    
+  </section>
+  {% endblock %}
+  <!-- Footer with Social Media Links -->
+  

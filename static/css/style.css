@@ -1,0 +1,361 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: Arial, sans-serif;
+  font-style: normal !important;
+  overflow-x: hidden;
+  background-color: #f9f9f9;
+}
+html h2, body h2 {
+  font-family: "Baskerville Old Face";
+  color: #8B4513;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+html h3, html h4, body h3, body h4 {
+  font-family: "Baskerville Old Face";
+}
+html p, body p {
+  font-family: "Baskerville Old Face";
+}
+html .btn-brown, body .btn-brown {
+  background-color: #8B4513;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1rem;
+}
+html .btn-brown:hover, body .btn-brown:hover {
+  background-color: #808080;
+}
+
+.brand-section {
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+
+.brand-logo {
+  object-fit: contain;
+  -webkit-object-fit: contain;
+  -moz-object-fit: contain;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.brand-logo {
+  max-width: 75%;
+  max-height: 75%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.video-background {
+  position: relative;
+  width: 100%;
+  height: 50vh;
+  overflow: hidden;
+}
+
+.video-background video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.navbar {
+  background-color: #808080;
+}
+
+.navbar-brand {
+  margin-left: 10px; /* Adjust the value as needed */
+}
+
+.navbar-brand {
+  display: flex;
+  font-family: "Baskerville Old Face";
+  flex-direction: column;
+  align-items: flex-start; /* Aligns both lines to the left */
+  line-height: 1; /* Ensures no space between the lines */
+  text-align: left; /* Ensures text alignment starts from the left */
+  color: white; /* Adjust the color as needed */
+}
+
+.navbar-brand .line-one,
+.navbar-brand .line-two {
+  font-size: 1rem; /* Adjust the font size as needed */
+}
+
+.navbar-nav .nav-link {
+  margin-right: 10px;
+  color: white !important;
+}
+
+.nav-item {
+  font-family: "Baskerville Old Face";
+}
+
+.navbar-nav .nav-link:hover {
+  color: #8B4513 !important;
+}
+
+section {
+  padding: 60px 0;
+}
+
+h2 {
+  color: #808080;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 1.1rem;
+  color: #808080;
+}
+
+.about-content {
+  display: flex; /* Create a flexible box container */
+  align-items: center; /* Vertically align items in the center */
+  justify-content: flex-start; /* Align items to the start (left) */
+  flex-direction: row; /* Default to a row layout (image on left, text on right) */
+}
+
+.portrait-img {
+  width: 300px; /* Adjust width to fit your design */
+  height: 350px; /* Taller image for a more vertical view */
+  object-fit: cover;
+  margin-right: 30px; /* Space between image and text */
+  border: none; /* Remove any border */
+  border-radius: 0; /* Remove rounded corners */
+}
+
+.about-text {
+  flex: 1; /* Allow the text to take up the remaining space */
+}
+
+.about-text p {
+  font-size: 1.1rem;
+  color: #333; /* Example color, you can use your $primary-color variable if you're using Sass */
+  line-height: 1.6;
+}
+
+/* Media query for mobile view */
+@media (max-width: 768px) {
+  .about-content {
+    flex-direction: column; /* Stack the elements vertically on mobile */
+    text-align: center; /* Center the text */
+    align-items: center; /* Center the image */
+  }
+  .portrait-img {
+    margin-right: 0; /* Remove right margin for mobile */
+    margin-bottom: 20px; /* Add space between the image and text */
+  }
+  .about-text p {
+    font-size: 1rem; /* Slightly adjust the font size for smaller screens */
+  }
+}
+.custom-contact-section {
+  background-color: #f9f9f9;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-contact-title {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.custom-contact-form {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.custom-contact-form-group {
+  flex: 1 1 calc(50% - 20px); /* Take 50% width with spacing */
+  display: flex;
+  flex-direction: column;
+}
+
+.custom-contact-label {
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.custom-contact-input, .custom-contact-textarea {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #333;
+  background-color: #f1f1f1; /* Light background for inputs */
+}
+
+.custom-contact-input:focus, .custom-contact-textarea:focus {
+  outline: none;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.3);
+}
+
+.custom-contact-textarea {
+  flex: 1 1 100%; /* Full width for textarea */
+  resize: none;
+}
+
+.custom-contact-button {
+  flex: 1 1 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #8B4513;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+}
+
+.custom-contact-button i {
+  margin-right: 8px;
+  font-size: 18px;
+}
+
+.custom-contact-button:hover {
+  background-color: #808080;
+}
+
+#previous-orders .order-photo {
+  position: relative;
+  overflow: hidden;
+}
+
+#previous-orders .order-photo img {
+  transition: transform 0.3s ease;
+}
+
+#previous-orders .order-photo:hover img {
+  transform: scale(1.05); /* Zoom in the image on hover */
+}
+
+#previous-orders .description {
+  background-color: rgba(0, 0, 0, 0.5); /* Transparent black background */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+#previous-orders .order-photo:hover .description {
+  opacity: 1; /* Show the description on hover */
+}
+
+#previous-orders .description p {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+#commission-info {
+  background-color: #f8f9fa;
+  padding: 30px;
+  border-radius: 8px;
+}
+
+#commission-info h2 {
+  font-size: 1.75rem;
+  margin-bottom: 20px;
+}
+
+#commission-info p {
+  font-size: 1rem;
+  color: #555;
+  font-family: "Baskerville Old Face";
+}
+
+#commission-info ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+#commission-info ul li {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+#commission-info form {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#commission-info .form-label {
+  font-weight: bold;
+  font-family: "Baskerville Old Face";
+}
+
+#commission-info .form-control {
+  margin-bottom: 15px;
+  font-family: "Baskerville Old Face";
+}
+
+#commission-info .btn {
+  width: 100%;
+}
+
+#col-md-6 h4 {
+  font-family: "Baskerville Old Face";
+}
+
+footer {
+  background-color: #808080;
+  color: white;
+}
+footer .all-rights {
+  justify-content: flex-start;
+}
+footer .all-rights strong {
+  font-weight: bold;
+  font-family: "Baskerville Old Face";
+  color: #8B4513;
+}
+footer .social-links a {
+  font-size: 1.2rem;
+  color: white;
+  margin: 0 15px;
+  text-decoration: none;
+}
+footer .social-links .social-item:hover {
+  color: #8B4513;
+}
+
+/*# sourceMappingURL=style.css.map */
