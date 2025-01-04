@@ -1,0 +1,96 @@
+#workImages {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #mainImage {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  #activeImage {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+  }
+
+  .work-image {
+    width: 80px;
+    height: auto;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  .work-image:hover {
+    transform: scale(1.1);
+  }
+
+  .work-image:active {
+    border: 2px solid #8B4513; /* Highlight active image */
+  }
+
+  /* Work Description Styling (Updated for Modern Look) */
+  .work-description {
+    background-color: #f8f9fa;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    margin-top: 20px;
+    transition: all 0.3s ease;
+  }
+
+  .work-description:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Slightly darker shadow on hover */
+  }
+
+  .work-description h4 {
+    font-family: "Baskerville Old Face";
+    color: #8B4513;
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+
+  .work-description p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 15px;
+  }
+
+  .work-description p strong {
+    font-weight: bold;
+    color: #8B4513; /* Brown color for emphasized text */
+  }
+
+  .work-description ul {
+    list-style-type: none;
+    margin: 10px 0;
+    padding-left: 20px;
+  }
+
+  .work-description ul li {
+    margin-bottom: 8px;
+    font-size: 1rem;
+    color: #666;
+  }
+
+  /* Footer */
+  footer {
+    background-color: #333;
+    color: white;
+  }
+
+  .social-links a {
+    font-size: 1.2rem;
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+  }
+
+  .social-links a:hover {
+    color: #8B4513;
+  }
