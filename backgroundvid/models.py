@@ -5,36 +5,29 @@ from cloudinary.models import CloudinaryField
 from django.db import models
 from django.core.exceptions import ValidationError
 
-class Video(models.Model):
-    #video = models.FileField(upload_to='backgroundvid/')
-    video = CloudinaryField('video')
+from cloudinary.models import CloudinaryField
+from django.core.exceptions import ValidationError
 
-    # def clean(self):
-    #     """
-    #     Ensure only one video object exists in the database.
-    #     """
-    #     if Video.objects.exists() and not self.pk:
-    #         raise ValidationError("Only one video can be uploaded.")
-    def is_video_format(self):
+class Video(models.Model):
+    video = CloudinaryField(
+        'video', 
+        resource_type='video',  # Explicitly specify video
+        allowed_formats=['mp4', 'mov', 'avi', 'mkv', 'webm']  # Add allowed video formats
+    )
+
+    def clean(self):
         """
-        Ensure the uploaded file is a video format.
-        """
-        if not self.video.name.endswith(('.mp4', '.mov', '.avi', '.mkv', '.webm')):
-            raise ValidationError("Invalid video file format. Please upload a valid video.")
-    
-    def save(self, *args, **kwargs):
-        """
-        Only allow saving if no existing video objects are in the database.
+        Ensure only one video object exists and the file is valid.
         """
         if Video.objects.exists() and not self.pk:
             raise ValidationError("Only one video can be uploaded.")
-        
-        super().save(*args, **kwargs)
 
-    def delete(self, *args, **kwargs):
-        """
-        Allow deletion of the video object.
-        """
-        super().delete(*args, **kwargs)
+        # Check file extension (for additional validation, optional)
+        if not self.video.name.lower().endswith(('.mp4', '.mov', '.avi', '.mkv', '.webm')):
+            raise ValidationError("Invalid video file format. Please upload a valid video.")
+
+    def save(self, *args, **kwargs):
+        self.clean()  # Validate before saving
+        super().save(*args, **kwargs)
 
     
