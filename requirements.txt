@@ -1,3 +1,4 @@
+psycopg2
 whitenoise
 asgiref==3.8.1
 certifi==2024.12.14
