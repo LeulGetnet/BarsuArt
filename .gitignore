@@ -1,1 +1,14 @@
 .env
+aboutme/__pycache__
+aboutme/migrations
+backgroundvid/__pycache__
+backgroundvid/migrations
+barsuart/__pycache__
+barsuart/migrations
+contactme/__pycache__
+contactme/migrations
+order/__pycache__
+order/migrations
+originals/__pycache__
+originals/migrations
+db.sqlite3
