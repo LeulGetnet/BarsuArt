@@ -29,7 +29,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 SECRET_KEY = 'django-insecure-3)hx(k=!ptcd68ydz&%i-=er8x@i82l4e3%9vq%p!3+e7de^0x'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'False').lower() in ('true', '1', 't', 'yes')
 
 ALLOWED_HOSTS = ['*']
 
@@ -59,7 +59,7 @@ EMAIL_PORT = 587  # Port for sending email (for Gmail)
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')  # Your email address
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')  # Your email password (or app password for Gmail)
-DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')   # Default from email for outgoing emails
+DEFAULT_TO_EMAIL = os.getenv('DEFAULT_TO_EMAIL')   # Default from email for outgoing emails
 
 MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -97,11 +97,17 @@ WSGI_APPLICATION = 'barsuart.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-
-
-DATABASES = {
-    'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
-}
+if DEBUG:
+    DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+    }
+else:
+    DATABASES = {
+        'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
+    }
 
 
 

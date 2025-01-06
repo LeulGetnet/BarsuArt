@@ -10,13 +10,13 @@ from originals.models import Artwork
 from django.conf import settings
 from django.contrib import messages
 
-def send_order_email(user_email, subject, message, uploaded_image):
+def send_order_email(subject, message, uploaded_image):
     try:
         email = EmailMessage(
             subject,                # Subject of the email
             message,                # Body of the email
             settings.DEFAULT_FROM_EMAIL,  # Sender's email address
-            [user_email]    # Whether to silently fail if there is an error
+            [settings.DEFAULT_TO_EMAIL] # Reciver's email address
         )
         file_name = uploaded_image.name
         file_data = uploaded_image.read()
@@ -28,7 +28,7 @@ def send_order_email(user_email, subject, message, uploaded_image):
         return True
 
     except Exception as e: 
-        print(f"failed to send email to {user_email}: {e}")
+        print(f"failed to send email to {settings.DEFAULT_TO_EMAIL}: {e}")
         return False
 
 def orderView(request):
@@ -67,7 +67,7 @@ def order(request):
                     wanted size: {wanted_size} 
                     style {style} 
                     cotact type: {email_or_phone_number}"""
-            email_sent = send_order_email("leulgetnet7@gmail.com", "New order from barsuARt", text, sample_photo)
+            email_sent = send_order_email("New order from barsuARt", text, sample_photo)
             if email_sent:
                 messages.success(request, "information successfully submited thank you.")
             # Optionally add custom behavior (e.g., sending an email)

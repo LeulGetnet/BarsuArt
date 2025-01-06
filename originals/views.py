@@ -12,18 +12,19 @@ from django.conf import settings
 from django.contrib import messages
 
 
-def send_confirmation_email(user_email, subject, message):
+def send_confirmation_email(subject, message, reply_to):
     try:
         send_mail(
             subject,                # Subject of the email
             message,                # Body of the email
-            settings.DEFAULT_FROM_EMAIL,  # Sender's email address
-            [user_email],           # Recipient's email address
+            settings.EMAIL_HOST_USER,  # Sender's email address
+            [settings.DEFAULT_TO_EMAIL],           # Recipient's email address
+            reply_to=[reply_to],
             fail_silently=False,    # Whether to silently fail if there is an error
         )
         return True
     except Exception as e:
-        print(f"error to send email to ueser {user_email} : {e}")
+        print(f"error to send email to ueser {settings.DEFAULT_TO_EMAIL} : {e}")
         return False
 
 def index(request):
@@ -34,7 +35,7 @@ def index(request):
             email = form.cleaned_data.get('email')
             message = form.cleaned_data.get('message')
             form.save()
-            sent_email = send_confirmation_email('leulgetnet7@gmail.com',"new contact me notification from barsuArt", f"user name: {user_name} email: {email} message: {message}")
+            sent_email = send_confirmation_email("new contact me notification from barsuArt", f"user name: {user_name} email: {email} message: {message}", email)
             if sent_email:
                 messages.success(request, "Your message was sent successfully!")
                 return redirect('index')
