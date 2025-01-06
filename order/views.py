@@ -5,7 +5,7 @@ from django.core.mail import EmailMessage
 from django.urls import reverse_lazy
 from django.views.generic.edit import FormView
 from .forms import OrderForm
-from .models import Order
+from .models import Order, OrderFormDescription
 from originals.models import Artwork
 from django.conf import settings
 from django.contrib import messages
@@ -78,8 +78,10 @@ def order(request):
         messages.error(request, "invalid input please check your data and try again.")
         return redirect('index')
     else:
+        description = OrderFormDescription.objects.order_by('-created_at').first()
         form = OrderForm()
         context = {
+            "description": description,
             "form": form
         }
         return render(request, 'order.html',  context)
