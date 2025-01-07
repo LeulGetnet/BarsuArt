@@ -2,6 +2,7 @@ from django.db import models
 from django.core.exceptions import ValidationError
 from cloudinary.models import CloudinaryField
 class OrderFormDescription(models.Model):
+      title = models.CharField()
       description = models.TextField()
       created_at = models.DateTimeField(auto_now=True)
 
