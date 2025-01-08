@@ -6,12 +6,9 @@
   <div class="row">
       <!-- Information on Commissioning an Oil Painting -->
       <div class="col-md-6 mb-4">
-          <h2>Would you like to commission a unique, personalized oil painting?</h2>
+          <h2>{{description.title}}</h2>
           <p>
               {{description.description}}
-          </p>
-          <p>
-            If you want to check out my previously ordered works, please visit the gallery section.
           </p>
           <div class="text-center mt-4">
             <a href="{% url 'order_list'%}" class="btn btn-brown">Refer to previous orders</a>
