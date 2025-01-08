@@ -43,7 +43,7 @@ def orderView(request):
         })
     context = {
              'originals': originals,
-             'title' : 'Art works made by my customers special order!'
+             'title' : "Art's made by order"
         }
     return render(request, 'orders_list.html', context)
 
