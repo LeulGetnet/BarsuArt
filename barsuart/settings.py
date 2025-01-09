@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'originals',
     'aboutme',
     'order',
@@ -50,7 +51,7 @@ INSTALLED_APPS = [
     'backgroundvid'
 ]
  # or 'bootstrap5' if you're using Bootstrap 5
-
+SITE_ID = 1
 # settings.py
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
