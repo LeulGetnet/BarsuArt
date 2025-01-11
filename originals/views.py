@@ -7,21 +7,20 @@ from django.shortcuts import render, get_object_or_404
 from contactme.forms import ContactForm
 # views.py or any other module
 
-from django.core.mail import send_mail
+from django.core.mail import EmailMessage
 from django.conf import settings
 from django.contrib import messages
 
 
-def send_confirmation_email(subject, message, reply_to):
+def send_confirmation_email(subject, message, userEmail):
     try:
-        send_mail(
+        EmailMessage(
             subject,                # Subject of the email
             message,                # Body of the email
             settings.EMAIL_HOST_USER,  # Sender's email address
             [settings.DEFAULT_TO_EMAIL],           # Recipient's email address
-            reply_to=[reply_to],
-            fail_silently=False,    # Whether to silently fail if there is an error
-        )
+            reply_to=[userEmail]
+        ).send(fail_silently=False)
         return True
     except Exception as e:
         print(f"error to send email to ueser {settings.DEFAULT_TO_EMAIL} : {e}")
