@@ -185,8 +185,8 @@ p {
   }
 
   .portrait-img {
-    margin-right: 0; /* Remove right margin for mobile */
-    margin-bottom: 20px; /* Add space between the image and text */
+    margin: 0 auto 20px; /* Center the image horizontally and add bottom margin */
+    display: block; /* Ensure the image is treated as a block element */
   }
 
   .about-text p {
