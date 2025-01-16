@@ -170,6 +170,8 @@ p {
   .portrait-img {
     margin: 0 auto 20px; /* Center the image horizontally and add bottom margin */
     display: block; /* Ensure the image is treated as a block element */
+    margin-left: auto; /* Center the image horizontally */
+    margin-right: auto;
   }
   .about-text p {
     font-size: 1rem; /* Slightly adjust the font size for smaller screens */
