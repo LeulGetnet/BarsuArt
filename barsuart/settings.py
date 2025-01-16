@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-3)hx(k=!ptcd68ydz&%i-=er8x@i82l4e3%9vq%p!3+e7de^0x
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'False').lower() in ('true', '1', 't', 'yes')
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['barsenetart.com', 'www.barsenetart.com']
 
 if DEBUG == False:
     SECURE_SSL_REDIRECT = True
