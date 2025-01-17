@@ -163,6 +163,7 @@ p {
 /* Media query for mobile view */
 @media (max-width: 768px) {
   .about-content {
+    display: flex;
     flex-direction: column; /* Stack the elements vertically on mobile */
     text-align: center; /* Center the text */
     align-items: center; /* Center the image */
