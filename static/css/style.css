@@ -169,6 +169,7 @@ p {
   }
   .portrait-img {
     margin: 0 auto 20px; /* Add bottom margin and horizontally center */
+    margin-left: 10px;
     display: block; /* Treat the image as a block-level element */
     width: 60%; /* Adjust width for smaller screens */
     max-width: 300px; /* Ensure the image doesn't exceed this size */
