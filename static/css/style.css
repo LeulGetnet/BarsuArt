@@ -146,6 +146,7 @@ p {
   height: 350px; /* Taller image for a more vertical view */
   object-fit: cover;
   margin-right: 30px; /* Space between image and text */
+  margin-left: 30px;
   border: none; /* Remove any border */
   border-radius: 0; /* Remove rounded corners */
 }
