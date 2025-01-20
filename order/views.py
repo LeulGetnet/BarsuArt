@@ -43,7 +43,8 @@ def orderView(request):
         })
     context = {
              'originals': originals,
-             'title' : "Art's made by order"
+             'title' : "Art's made by order",
+             'site_title' : 'orders'
         }
     return render(request, 'orders_list.html', context)
 
@@ -82,7 +83,8 @@ def order(request):
         form = OrderForm()
         context = {
             "description": description,
-            "form": form
+            "form": form,
+            'site_title' : 'order_form'
         }
         return render(request, 'order.html',  context)
     
@@ -91,6 +93,7 @@ def detail(request, id):
     list_image = Artworks.images.order_by('created_at')  # Get the latest image based on created_at
     context = {
         'Artwork': Artworks,
-        'list_image': list_image
+        'list_image': list_image,
+        'site_title' : Artworks.title
     }
     return render(request, 'detail.html', context)
