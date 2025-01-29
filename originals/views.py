@@ -54,8 +54,7 @@ def index(request):
         context = {
             'aboutme': aboutme,
             'back_vid' : back_vid,
-            'form': form,
-            'site_title' : 'index'
+            'form': form
         }
         return render(request, 'index.html', context)
 def original_view(request):
@@ -69,8 +68,7 @@ def original_view(request):
             })
         context = {
              'originals': originals,
-             'title' : 'My original art works',
-             'site_title' : 'originals'
+             'title' : 'My original art works'
         }
         return render(request, 'orders_list.html', context)
 def detail(request, id):
@@ -78,7 +76,7 @@ def detail(request, id):
     list_image = Artworks.images.order_by('created_at')  # Get the latest image based on created_at
     context = {
         'Artwork': Artworks,
-        'list_image': list_image,
-        'site_title' : Artworks.title
+        'list_image': list_image
+        
     }
     return render(request, 'detail.html', context)
