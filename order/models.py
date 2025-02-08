@@ -2,14 +2,14 @@ from django.db import models
 from django.core.exceptions import ValidationError
 from cloudinary.models import CloudinaryField
 class OrderFormDescription(models.Model):
-      title = models.CharField()
+      title = models.CharField(max_length=30, blank = False, null = False)
       description = models.TextField()
       created_at = models.DateTimeField(auto_now=True)
 
       def __str__(self):
             return str(self.created_at)
 class Order(models.Model):
-    user_name = models.CharField(max_length=255)
+    user_name = models.CharField(max_length=255, blank = False, null = False)
     description = models.TextField()
     #sample_photo = models.ImageField(upload_to='sample_photos/')
     sample_photo = CloudinaryField('image')
