@@ -146,6 +146,7 @@ p {
   height: 350px; /* Taller image for a more vertical view */
   object-fit: cover;
   margin-right: 30px; /* Space between image and text */
+  margin-left: 30px;
   border: none; /* Remove any border */
   border-radius: 0; /* Remove rounded corners */
 }
@@ -163,13 +164,19 @@ p {
 /* Media query for mobile view */
 @media (max-width: 768px) {
   .about-content {
+    display: flex;
     flex-direction: column; /* Stack the elements vertically on mobile */
     text-align: center; /* Center the text */
     align-items: center; /* Center the image */
   }
   .portrait-img {
-    margin-right: 0; /* Remove right margin for mobile */
-    margin-bottom: 20px; /* Add space between the image and text */
+    margin: 0 auto 20px; /* Add bottom margin and horizontally center */
+    margin-left: 10px;
+    display: block; /* Treat the image as a block-level element */
+    width: 60%; /* Adjust width for smaller screens */
+    max-width: 300px; /* Ensure the image doesn't exceed this size */
+    height: auto; /* Maintain the aspect ratio */
+    object-fit: cover; /* Ensure proper cropping if necessary */
   }
   .about-text p {
     font-size: 1rem; /* Slightly adjust the font size for smaller screens */

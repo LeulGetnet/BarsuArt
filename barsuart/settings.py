@@ -31,9 +31,13 @@ SECRET_KEY = 'django-insecure-3)hx(k=!ptcd68ydz&%i-=er8x@i82l4e3%9vq%p!3+e7de^0x
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'False').lower() in ('true', '1', 't', 'yes')
 
-ALLOWED_HOSTS = ['*']
+if DEBUG:
+    ALLOWED_HOSTS = ['*']
+else:
+    ALLOWED_HOSTS = ['barsenetart.com', 'www.barsenetart.com']
 
-SECURE_SSL_REDIRECT = True
+if DEBUG == False:
+    SECURE_SSL_REDIRECT = True
 # Application definition
 
 INSTALLED_APPS = [
@@ -43,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'originals',
     'aboutme',
     'order',
@@ -50,7 +55,7 @@ INSTALLED_APPS = [
     'backgroundvid'
 ]
  # or 'bootstrap5' if you're using Bootstrap 5
-
+SITE_ID = 1
 # settings.py
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
