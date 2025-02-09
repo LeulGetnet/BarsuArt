@@ -40,6 +40,26 @@ if DEBUG == False:
     SECURE_SSL_REDIRECT = True
 # Application definition
 
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": "ERROR",  # Change to DEBUG for more verbosity
+    },
+    "django": {
+        "handlers": ["console"],
+        "level": "ERROR",
+        "propagate": True,
+    },
+}
+
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
