@@ -1,5 +1,6 @@
 psycopg2
 whitenoise
+pillow
 asgiref==3.8.1
 certifi==2024.12.14
 cloudinary==1.41.0
