@@ -18,6 +18,7 @@ def send_order_email(subject, message, uploaded_image):
             settings.DEFAULT_FROM_EMAIL,  # Sender's email address
             [settings.DEFAULT_TO_EMAIL] # Reciver's email address
         )
+        uploaded_image.seek(0)
         file_name = uploaded_image.name
         file_data = uploaded_image.read()
         content_type = uploaded_image.content_type
