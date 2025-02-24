@@ -9,7 +9,6 @@ from .models import Order, OrderFormDescription
 from originals.models import Artwork
 from django.conf import settings
 from django.contrib import messages
-
 def send_order_email(subject, message, uploaded_image):
     try:
         email = EmailMessage(
@@ -66,8 +65,8 @@ def order(request):
             text = f"""name: {name}, 
                     description: {description}, 
                     wanted size: {wanted_size} 
-                    style {style} 
-                    cotact type: {email_or_phone_number}"""
+                    style: {style} 
+                    cotact: {email_or_phone_number}"""
             email_sent = send_order_email("New order from barsuARt", text, sample_photo)
             if email_sent:
                 messages.success(request, "information successfully submited thank you.")

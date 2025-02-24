@@ -1,5 +1,7 @@
 from django import forms
 from .models import Order
+from django_recaptcha.fields import ReCaptchaField
+from django_recaptcha.widgets import ReCaptchaV3
 class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
@@ -29,4 +31,4 @@ class OrderForm(forms.ModelForm):
     email_or_phone_number = forms.CharField(
         widget=forms.TextInput(attrs={'class': 'form-control custom-input', 'placeholder': 'Your email or phone number'}),
     )
-  
+    captcha = ReCaptchaField(widget=ReCaptchaV3())

@@ -72,7 +72,8 @@ INSTALLED_APPS = [
     'aboutme',
     'order',
     'contactme',
-    'backgroundvid'
+    'backgroundvid',
+    'django_recaptcha'
 ]
  # or 'bootstrap5' if you're using Bootstrap 5
 SITE_ID = 1
@@ -195,3 +196,5 @@ CLOUDINARY = {
   'secure': True
 }
 
+RECAPTCHA_PUBLIC_KEY = os.getenv("RECAPTCHA_PUBLIC_KEY", "default-public-key")
+RECAPTCHA_PRIVATE_KEY = os.getenv("RECAPTCHA_PRIVATE_KEY", "default-private-key")

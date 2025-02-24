@@ -1,5 +1,7 @@
 from django import forms
 from .models import Contact
+from django_recaptcha.fields import ReCaptchaField
+from django_recaptcha.widgets import ReCaptchaV3
 class ContactForm(forms.ModelForm):
     class Meta:
         model = Contact
@@ -13,3 +15,4 @@ class ContactForm(forms.ModelForm):
     message = forms.CharField(
         widget=forms.Textarea(attrs={'id': 'custom-message', 'name': 'message', 'class': 'custom-contact-textarea', 'placeholder': 'Your message..'}),
     )
+    captcha = ReCaptchaField(widget=ReCaptchaV3())
