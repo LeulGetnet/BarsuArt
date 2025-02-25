@@ -8,23 +8,45 @@ from contactme.forms import ContactForm
 # views.py or any other module
 
 from django.core.mail import EmailMessage
-from django.conf import settings
 from django.contrib import messages
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+from django.conf import settings
+from datetime import datetime
 
-
-def send_confirmation_email(subject, message, userEmail):
+def send_confirmation_email(subject, message, sender_name, userEmail):
     try:
-        EmailMessage(
-            subject,                # Subject of the email
-            message,                # Body of the email
-            settings.EMAIL_HOST_USER,  # Sender's email address
-            [settings.DEFAULT_TO_EMAIL],           # Recipient's email address
-            reply_to=[userEmail]
-        ).send(fail_silently=False)
+        # Prepare context for the email template
+        context = {
+            "subject": subject,
+            "message": message,
+            "sender_name": sender_name,
+            "sender_email": userEmail,
+            "date": datetime.now().strftime("%B %d, %Y %I:%M %p"),
+            "year": datetime.now().year
+        }
+        
+        # Render HTML email template with context
+        html_content = render_to_string("email_templates/contact.html", context)
+        text_content = strip_tags(html_content)  # Convert HTML to plain text fallback
+
+        email = EmailMultiAlternatives(
+            subject=subject,
+            body=text_content,  # Plain text version
+            from_email=settings.EMAIL_HOST_USER,
+            to=[settings.DEFAULT_TO_EMAIL],
+            reply_to=[userEmail],
+        )
+        email.attach_alternative(html_content, "text/html")  # Attach HTML version
+
+        email.send(fail_silently=False)
         return True
     except Exception as e:
-        print(f"error to send email to ueser {settings.DEFAULT_TO_EMAIL} : {e}")
+        print(f"Error sending email to {settings.DEFAULT_TO_EMAIL}: {e}")
         return False
+
+
 
 def index(request):
     if request.method == 'POST':
@@ -34,7 +56,7 @@ def index(request):
             email = form.cleaned_data.get('email')
             message = form.cleaned_data.get('message')
             form.save()
-            sent_email = send_confirmation_email("new contact me notification from barsuArt", f"user name: {user_name} email: {email} message: {message}", email)
+            sent_email = send_confirmation_email(f"Barsenet art contact me from {user_name}", message, user_name, email)
             if sent_email:
                 messages.success(request, "Your message was sent successfully!")
                 return redirect('index')
