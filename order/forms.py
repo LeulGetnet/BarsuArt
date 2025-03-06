@@ -18,7 +18,7 @@ class OrderForm(forms.ModelForm):
         widget=forms.ClearableFileInput(attrs={'class': 'form-control custom-file-input'}),
     )
     wanted_size = forms.CharField(
-        widget=forms.TextInput(attrs={'class': 'form-control custom-input', 'placeholder': 'E.g., 16x20 CM'}),
+        widget=forms.TextInput(attrs={'class': 'form-control custom-input', 'placeholder': 'E.g., 40x30 CM'}),
     )
     style = forms.ChoiceField(
     choices=[('detailed', 'Detailed'), ('abstract', 'Abstract')],
