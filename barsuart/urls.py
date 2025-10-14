@@ -20,8 +20,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 urlpatterns = [
     path('200273/', admin.site.urls),
-    path('', include('originals.urls')),
-    path('order/', include('order.urls')),
+    path('', include('originals.urls'))
        # Include the app's URLs
 ]
 

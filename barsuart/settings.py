@@ -70,7 +70,6 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'originals',
     'aboutme',
-    'order',
     'contactme',
     'backgroundvid',
     'django_recaptcha'
