@@ -367,17 +367,18 @@ footer .social-links .social-item:hover {
 
 /* Viewport-aware blur effect for originals page */
 .artwork-item {
-  transition: filter 0.6s ease, opacity 0.6s ease;
+  transition: filter 0.5s ease, opacity 0.5s ease;
+  will-change: filter, opacity;
 }
 
 .artwork-item.blurred {
-  filter: blur(8px);
-  opacity: 0.4;
+  filter: blur(12px) !important;
+  opacity: 0.3 !important;
 }
 
 .artwork-item.visible {
-  filter: blur(0);
-  opacity: 1;
+  filter: blur(0) !important;
+  opacity: 1 !important;
 }
 
 /*# sourceMappingURL=style.css.map */

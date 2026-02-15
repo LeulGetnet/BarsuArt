@@ -23,9 +23,11 @@
 </section>
 
 <script>
-// Blur effect based on viewport visibility
-document.addEventListener('DOMContentLoaded', function() {
+// Viewport-aware blur effect - continuously active on scroll
+(function() {
     const artworkItems = document.querySelectorAll('.artwork-item');
+    
+    console.log('Found artwork items:', artworkItems.length);
     
     if (artworkItems.length === 0) return;
     
@@ -35,16 +37,17 @@ document.addEventListener('DOMContentLoaded', function() {
         const windowHeight = window.innerHeight || document.documentElement.clientHeight;
         
         // Element is fully visible if its top and bottom are within viewport
-        return (
-            rect.top >= 0 &&
-            rect.bottom <= windowHeight
-        );
+        const fullyVisible = rect.top >= 0 && rect.bottom <= windowHeight;
+        
+        return fullyVisible;
     }
     
     // Apply blur based on visibility
     function updateBlurEffect() {
-        artworkItems.forEach(item => {
-            if (isFullyVisible(item)) {
+        artworkItems.forEach((item, index) => {
+            const isVisible = isFullyVisible(item);
+            
+            if (isVisible) {
                 item.classList.remove('blurred');
                 item.classList.add('visible');
             } else {
@@ -54,20 +57,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Run on page load
+    // Run immediately
     updateBlurEffect();
     
-    // Run on scroll with throttle for performance
-    let scrollTimeout;
-    window.addEventListener('scroll', function() {
-        if (scrollTimeout) {
-            clearTimeout(scrollTimeout);
-        }
-        scrollTimeout = setTimeout(updateBlurEffect, 50);
-    });
+    // Run on scroll (no throttle for immediate response)
+    window.addEventListener('scroll', updateBlurEffect, { passive: true });
     
     // Run on window resize
     window.addEventListener('resize', updateBlurEffect);
-});
+    
+    console.log('Blur effect initialized');
+})();
 </script>
 {% endblock %}
