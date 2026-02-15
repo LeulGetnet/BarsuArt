@@ -37,15 +37,21 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
     
-    // Check if item is fully visible in viewport
-    function isFullyVisible(element) {
+    // Check if item is centered and fully visible in viewport
+    function isInViewportCenter(element) {
         const rect = element.getBoundingClientRect();
         const windowHeight = window.innerHeight || document.documentElement.clientHeight;
         
-        // Element is fully visible if its top and bottom are within viewport
-        const fullyVisible = rect.top >= 0 && rect.bottom <= windowHeight;
+        // Calculate visible portion of element
+        const elementTop = rect.top;
+        const elementBottom = rect.bottom;
         
-        return fullyVisible;
+        // Element is fully in viewport if both top and bottom are within screen bounds
+        // Add margin of 50px - items must be at least 50px inside viewport to be clear
+        const margin = 50;
+        const isFullyVisible = elementTop >= margin && elementBottom <= (windowHeight - margin);
+        
+        return isFullyVisible;
     }
     
     // Apply blur based on visibility
@@ -54,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let blurredCount = 0;
         
         artworkItems.forEach((item, index) => {
-            const isVisible = isFullyVisible(item);
+            const isVisible = isInViewportCenter(item);
             const rect = item.getBoundingClientRect();
             
             if (isVisible) {
