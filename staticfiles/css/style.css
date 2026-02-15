@@ -382,14 +382,16 @@ footer .social-links .social-item:hover {
   transition: filter 0.5s ease, opacity 0.5s ease;
 }
 
-.artwork-item.blurred img {
+.artwork-item.blurred img.img-fluid {
   filter: blur(12px) !important;
   opacity: 0.3 !important;
+  transform: scale(1) !important;
 }
 
-.artwork-item.visible img {
+.artwork-item.visible img.img-fluid {
   filter: blur(0) !important;
   opacity: 1 !important;
+  transform: scale(1) !important;
 }
 
 /*# sourceMappingURL=style.css.map */
