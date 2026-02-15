@@ -24,12 +24,18 @@
 
 <script>
 // Viewport-aware blur effect - continuously active on scroll
-(function() {
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded, starting blur script...');
+    
     const artworkItems = document.querySelectorAll('.artwork-item');
     
     console.log('Found artwork items:', artworkItems.length);
+    console.log('First item:', artworkItems[0]);
     
-    if (artworkItems.length === 0) return;
+    if (artworkItems.length === 0) {
+        console.error('No artwork items found!');
+        return;
+    }
     
     // Check if item is fully visible in viewport
     function isFullyVisible(element) {
@@ -44,29 +50,39 @@
     
     // Apply blur based on visibility
     function updateBlurEffect() {
+        let visibleCount = 0;
+        let blurredCount = 0;
+        
         artworkItems.forEach((item, index) => {
             const isVisible = isFullyVisible(item);
+            const rect = item.getBoundingClientRect();
             
             if (isVisible) {
                 item.classList.remove('blurred');
                 item.classList.add('visible');
+                visibleCount++;
             } else {
                 item.classList.add('blurred');
                 item.classList.remove('visible');
+                blurredCount++;
             }
         });
+        
+        console.log('Visible:', visibleCount, 'Blurred:', blurredCount);
     }
     
     // Run immediately
     updateBlurEffect();
     
     // Run on scroll (no throttle for immediate response)
-    window.addEventListener('scroll', updateBlurEffect, { passive: true });
+    window.addEventListener('scroll', function() {
+        updateBlurEffect();
+    }, { passive: true });
     
     // Run on window resize
     window.addEventListener('resize', updateBlurEffect);
     
-    console.log('Blur effect initialized');
-})();
+    console.log('Blur effect initialized and running!');
+});
 </script>
 {% endblock %}
