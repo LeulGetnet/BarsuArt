@@ -370,28 +370,30 @@ footer .social-links .social-item:hover {
   transition: all 0.5s ease;
 }
 
-.artwork-item.blurred .order-photo {
+#previous-orders .artwork-item.blurred .order-photo {
   filter: blur(12px) !important;
   opacity: 0.3 !important;
   transition: filter 0.5s ease, opacity 0.5s ease;
 }
 
-.artwork-item.visible .order-photo {
+#previous-orders .artwork-item.visible .order-photo {
   filter: blur(0) !important;
   opacity: 1 !important;
   transition: filter 0.5s ease, opacity 0.5s ease;
 }
 
-.artwork-item.blurred img.img-fluid {
+#previous-orders .artwork-item.blurred .order-photo img.img-fluid {
   filter: blur(12px) !important;
   opacity: 0.3 !important;
   transform: scale(1) !important;
+  transition: filter 0.5s ease, opacity 0.5s ease, transform 0.3s ease;
 }
 
-.artwork-item.visible img.img-fluid {
+#previous-orders .artwork-item.visible .order-photo img.img-fluid {
   filter: blur(0) !important;
   opacity: 1 !important;
   transform: scale(1) !important;
+  transition: filter 0.5s ease, opacity 0.5s ease, transform 0.3s ease;
 }
 
 /*# sourceMappingURL=style.css.map */
