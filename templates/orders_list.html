@@ -6,7 +6,7 @@
     <div class="row">
         <!-- Order 1 -->
          {%for item in originals%}
-        <div class="col-md-4 mb-4">
+        <div class="col-md-4 mb-4 artwork-item {% if forloop.counter > 6 %}lazy-load blurred{% endif %}" data-index="{{forloop.counter}}">
             <a href="{% url 'detail' item.original.id %}">
             <div class="order-photo position-relative">
                 <img src="{{item.latest_image.image.url}}" alt="Order 1" class="img-fluid">
@@ -21,4 +21,33 @@
         <!-- Order 2 -->
     </div>
 </section>
+
+<script>
+// Lazy load with blur effect for originals page
+document.addEventListener('DOMContentLoaded', function() {
+    const lazyItems = document.querySelectorAll('.lazy-load');
+    
+    if (lazyItems.length === 0) return; // No items to lazy load
+    
+    const observerOptions = {
+        root: null,
+        rootMargin: '100px',
+        threshold: 0.1
+    };
+    
+    const observer = new IntersectionObserver(function(entries, observer) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.remove('blurred');
+                entry.target.classList.add('revealed');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+    
+    lazyItems.forEach(item => {
+        observer.observe(item);
+    });
+});
+</script>
 {% endblock %}
