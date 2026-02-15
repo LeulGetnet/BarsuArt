@@ -52,10 +52,11 @@
     color: #8B4513;
     font-size: 24px;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 12px;
   }
 
   .work-description p {
+    font-family: "Baskerville Old Face";
     font-size: 1.1rem;
     line-height: 1.8;
     color: #555;
