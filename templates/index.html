@@ -14,11 +14,33 @@
 
   <!-- Video Background Section -->
   <section class="video-background">
-    <video autoplay loop muted playsinline>
+    <video id="backgroundVideo" autoplay loop muted playsinline preload="auto">
       <source src="{{back_vid.video.url}}" type="video/mp4">
       Your browser does not support the video tag.
     </video>
   </section>
+
+  <script>
+    // Ensure video autoplays on all browsers
+    document.addEventListener('DOMContentLoaded', function() {
+      var video = document.getElementById('backgroundVideo');
+      if (video) {
+        video.muted = true;
+        var playPromise = video.play();
+        
+        if (playPromise !== undefined) {
+          playPromise.then(function() {
+            // Autoplay started successfully
+          }).catch(function(error) {
+            // Autoplay was prevented, try again on user interaction
+            document.addEventListener('click', function() {
+              video.play();
+            }, { once: true });
+          });
+        }
+      }
+    });
+  </script>
 
 
   <!-- Recent Works Section -->
