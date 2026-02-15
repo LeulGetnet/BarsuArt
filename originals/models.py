@@ -4,7 +4,7 @@ from cloudinary.models import CloudinaryField
 class Artwork(models.Model):
     title = models.CharField("enter your title here: ", max_length=50)
     description = models.TextField("describe here detail info about the original", null=True, blank=True)
-    catagory = models.CharField(choices=[('original', 'Original'), ('order', 'Order')], max_length=50)
+    category = models.CharField(choices=[('original', 'Original')], max_length=50, default='original')
     date = models.DateTimeField(auto_now_add=True)
     created_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):

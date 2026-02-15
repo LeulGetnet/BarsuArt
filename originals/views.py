@@ -80,7 +80,7 @@ def index(request):
         }
         return render(request, 'index.html', context)
 def original_view(request):
-        latest_work = Artwork.objects.order_by('-created_at').filter(catagory="original")
+        latest_work = Artwork.objects.order_by('-created_at').filter(category="original")
         originals = []
         for original in latest_work:
             latest_image = original.images.order_by('-created_at').first()  # Get the latest image based on created_at
