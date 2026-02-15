@@ -13,7 +13,7 @@
     width: 100%;
     max-width: 500px;
     height: auto;
-    border-radius: 8px;
+    border-radius: 0;
     transition: transform 0.3s ease;
   }
 
@@ -33,25 +33,26 @@
     border: 2px solid #8B4513; /* Highlight active image */
   }
 
-  /* Work Description Styling (Updated for Modern Look) */
+  /* Work Description Styling (Plain Text) */
   .work-description {
-    background-color: #f8f9fa;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
     margin-top: 20px;
-    transition: all 0.3s ease;
+    transition: none;
   }
 
   .work-description:hover {
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Slightly darker shadow on hover */
+    box-shadow: none;
   }
 
   .work-description h4 {
     font-family: "Baskerville Old Face";
     color: #8B4513;
     font-size: 24px;
-    margin-bottom: 15px;
+    font-weight: bold;
+    margin-bottom: 20px;
   }
 
   .work-description p {
