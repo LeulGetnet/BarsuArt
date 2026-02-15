@@ -6,7 +6,7 @@
     <div class="row">
         <!-- Order 1 -->
          {%for item in originals%}
-        <div class="col-md-4 mb-4 artwork-item {% if forloop.counter > 6 %}lazy-load blurred{% endif %}" data-index="{{forloop.counter}}">
+        <div class="col-md-4 mb-4 artwork-item" data-index="{{forloop.counter}}">
             <a href="{% url 'detail' item.original.id %}">
             <div class="order-photo position-relative">
                 <img src="{{item.latest_image.image.url}}" alt="Order 1" class="img-fluid">
@@ -23,31 +23,51 @@
 </section>
 
 <script>
-// Lazy load with blur effect for originals page
+// Blur effect based on viewport visibility
 document.addEventListener('DOMContentLoaded', function() {
-    const lazyItems = document.querySelectorAll('.lazy-load');
+    const artworkItems = document.querySelectorAll('.artwork-item');
     
-    if (lazyItems.length === 0) return; // No items to lazy load
+    if (artworkItems.length === 0) return;
     
-    const observerOptions = {
-        root: null,
-        rootMargin: '100px',
-        threshold: 0.1
-    };
+    // Check if item is fully visible in viewport
+    function isFullyVisible(element) {
+        const rect = element.getBoundingClientRect();
+        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+        
+        // Element is fully visible if its top and bottom are within viewport
+        return (
+            rect.top >= 0 &&
+            rect.bottom <= windowHeight
+        );
+    }
     
-    const observer = new IntersectionObserver(function(entries, observer) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.remove('blurred');
-                entry.target.classList.add('revealed');
-                observer.unobserve(entry.target);
+    // Apply blur based on visibility
+    function updateBlurEffect() {
+        artworkItems.forEach(item => {
+            if (isFullyVisible(item)) {
+                item.classList.remove('blurred');
+                item.classList.add('visible');
+            } else {
+                item.classList.add('blurred');
+                item.classList.remove('visible');
             }
         });
-    }, observerOptions);
+    }
     
-    lazyItems.forEach(item => {
-        observer.observe(item);
+    // Run on page load
+    updateBlurEffect();
+    
+    // Run on scroll with throttle for performance
+    let scrollTimeout;
+    window.addEventListener('scroll', function() {
+        if (scrollTimeout) {
+            clearTimeout(scrollTimeout);
+        }
+        scrollTimeout = setTimeout(updateBlurEffect, 50);
     });
+    
+    // Run on window resize
+    window.addEventListener('resize', updateBlurEffect);
 });
 </script>
 {% endblock %}

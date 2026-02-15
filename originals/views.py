@@ -89,8 +89,7 @@ def original_view(request):
                 'latest_image': latest_image
             })
         context = {
-             'originals': originals,
-             'title' : 'My original art works'
+             'originals': originals
         }
         return render(request, 'orders_list.html', context)
 def detail(request, id):
