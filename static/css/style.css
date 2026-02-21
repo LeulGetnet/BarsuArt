@@ -72,6 +72,7 @@ html .btn-brown:hover, body .btn-brown:hover {
   width: 100%;
   height: 50vh;
   overflow: hidden;
+  background-color: #000;
 }
 
 .video-background video {
@@ -82,6 +83,7 @@ html .btn-brown:hover, body .btn-brown:hover {
   height: 100%;
   object-fit: cover;
   pointer-events: none;
+  background-color: #000;
 }
 
 .navbar {

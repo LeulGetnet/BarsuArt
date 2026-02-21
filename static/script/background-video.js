@@ -4,14 +4,46 @@
 // the first user gesture.
 
 (function () {
+  var boundGesture = false;
+
+  function configure(video) {
+    if (!video) return;
+
+    // Make autoplay eligibility as explicit as possible for WebKit.
+    video.muted = true;
+    video.defaultMuted = true;
+    video.volume = 0;
+    video.autoplay = true;
+    video.loop = true;
+    video.playsInline = true;
+
+    video.setAttribute('muted', '');
+    video.setAttribute('autoplay', '');
+    video.setAttribute('loop', '');
+    video.setAttribute('playsinline', '');
+    video.setAttribute('webkit-playsinline', '');
+    video.setAttribute('disablepictureinpicture', '');
+  }
+
+  function bindGestureFallback(video) {
+    if (boundGesture) return;
+    boundGesture = true;
+
+    var once = { once: true, passive: true };
+    var handler = function () {
+      attemptPlay(video);
+    };
+
+    document.addEventListener('pointerdown', handler, once);
+    document.addEventListener('touchstart', handler, once);
+    document.addEventListener('click', handler, once);
+    document.addEventListener('keydown', handler, once);
+  }
+
   function attemptPlay(video) {
     if (!video) return;
 
-    // These attributes are required for autoplay on iOS and help on macOS.
-    video.muted = true;
-    video.setAttribute('muted', '');
-    video.setAttribute('playsinline', '');
-    video.setAttribute('webkit-playsinline', '');
+    configure(video);
 
     var p;
     try {
@@ -22,20 +54,49 @@
 
     if (p && typeof p.then === 'function') {
       p.catch(function () {
-        // Fall back to the first user interaction.
-        var once = { once: true, passive: true };
-        var handler = function () {
-          attemptPlay(video);
-        };
-        document.addEventListener('pointerdown', handler, once);
-        document.addEventListener('touchstart', handler, once);
-        document.addEventListener('click', handler, once);
+        bindGestureFallback(video);
       });
     }
   }
 
   function init() {
-    attemptPlay(document.getElementById('backgroundVideo'));
+    var video = document.getElementById('backgroundVideo');
+    if (!video) return;
+
+    configure(video);
+
+    // Kick playback across a few lifecycle moments; WebKit can be finicky.
+    if (typeof requestAnimationFrame === 'function') {
+      requestAnimationFrame(function () {
+        attemptPlay(video);
+      });
+    } else {
+      attemptPlay(video);
+    }
+
+    setTimeout(function () {
+      if (video.paused) attemptPlay(video);
+    }, 300);
+
+    video.addEventListener(
+      'loadedmetadata',
+      function () {
+        if (video.paused) attemptPlay(video);
+      },
+      { once: true }
+    );
+
+    video.addEventListener(
+      'canplay',
+      function () {
+        if (video.paused) attemptPlay(video);
+      },
+      { once: true }
+    );
+
+    document.addEventListener('visibilitychange', function () {
+      if (!document.hidden && video.paused) attemptPlay(video);
+    });
   }
 
   if (document.readyState === 'loading') {
