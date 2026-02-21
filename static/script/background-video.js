@@ -5,6 +5,7 @@
 
 (function () {
   var boundGesture = false;
+  var observer;
 
   function configure(video) {
     if (!video) return;
@@ -65,7 +66,33 @@
 
     configure(video);
 
-    // Kick playback across a few lifecycle moments; WebKit can be finicky.
+    // Autoplay is sometimes blocked if play() is called while offscreen.
+    // Start trying once the video is actually in view.
+    if (observer) {
+      try {
+        observer.disconnect();
+      } catch (e) {
+        // ignore
+      }
+      observer = null;
+    }
+
+    if ('IntersectionObserver' in window) {
+      observer = new IntersectionObserver(
+        function (entries) {
+          for (var i = 0; i < entries.length; i++) {
+            if (entries[i].isIntersecting) {
+              attemptPlay(video);
+              break;
+            }
+          }
+        },
+        { threshold: 0.2 }
+      );
+      observer.observe(video);
+    }
+
+    // Still try immediately + after a short delay.
     if (typeof requestAnimationFrame === 'function') {
       requestAnimationFrame(function () {
         attemptPlay(video);
@@ -76,7 +103,7 @@
 
     setTimeout(function () {
       if (video.paused) attemptPlay(video);
-    }, 300);
+    }, 350);
 
     video.addEventListener(
       'loadedmetadata',
